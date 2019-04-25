@@ -36,5 +36,5 @@
       "Facebook\\WebDriver\\": ["tests/unit", "tests/functional"]
     },
     "classmap": ["tests/functional/"]
-  },
+  }
 }
