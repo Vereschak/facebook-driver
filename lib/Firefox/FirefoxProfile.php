@@ -46,11 +46,29 @@ class FirefoxProfile
     private $profilePath = null;
 
     /**
+     * @var bool
+     */
+    private $isBase64 = false;
+
+    /**
      * @param mixed $setProfile
      */
     public function setProfilePath(string $profilePath): void
     {
         $this->profilePath = $profilePath;
+    }
+
+    /**
+     * @param bool $isBase64
+     */
+    public function setIsBase64($isBase64)
+    {
+        $this->isBase64 = $isBase64;
+    }
+
+
+    public function getBase64FromPath($path){
+        return base64_encode(file_get_contents($path));
     }
 
     /**
@@ -143,7 +161,12 @@ class FirefoxProfile
 
         if(!empty($this->profilePath))
         {
-            $profile = base64_encode(file_get_contents($this->profilePath));
+            if(!$this->isBase64) {
+                $profile = base64_encode(file_get_contents($this->profilePath));
+            }
+            else{
+                $profile = $this->profilePath;
+            }
             return $profile;
         }
 
