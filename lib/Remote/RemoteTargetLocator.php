@@ -111,7 +111,8 @@ class RemoteTargetLocator implements WebDriverTargetLocator
     {
         $response = $this->driver->execute(DriverCommand::GET_ACTIVE_ELEMENT, []);
         $method = new RemoteExecuteMethod($this->driver);
+        $element = (empty($response['ELEMENT']))?reset($response):$response['ELEMENT'];
 
-        return new RemoteWebElement($method, $response['ELEMENT']);
+        return new RemoteWebElement($method, $element);
     }
 }

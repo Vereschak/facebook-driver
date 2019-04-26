@@ -103,8 +103,8 @@ class RemoteWebElement implements WebDriverElement, WebDriverLocatable
             DriverCommand::FIND_CHILD_ELEMENT,
             $params
         );
-
-        return $this->newElement($raw_element['ELEMENT']);
+        $element = (empty($raw_element['ELEMENT']))?reset($raw_element):$raw_element['ELEMENT'];
+        return $this->newElement($element);
     }
 
     /**
@@ -129,7 +129,8 @@ class RemoteWebElement implements WebDriverElement, WebDriverLocatable
 
         $elements = [];
         foreach ($raw_elements as $raw_element) {
-            $elements[] = $this->newElement($raw_element['ELEMENT']);
+            $element = (empty($raw_element['ELEMENT']))?reset($raw_element):$raw_element['ELEMENT'];
+            $elements[] = $this->newElement($element);
         }
 
         return $elements;
